@@ -1,0 +1,19 @@
+#!/bin/bash
+
+parted /dev/xvdh mklabel gpt mkpart primary ext4 1MiB 100%
+sleep 2
+mkfs.ext4 /dev/xvdh1
+echo '/dev/xvdh1 /opt ext4 defaults 0 0' >> /etc/fstab
+mount -a
+
+apt-get update
+apt-get install -y awscli
+wget -O splunk-8.0.1-6db836e2fb9e-linux-2.6-amd64.deb 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=8.0.1&product=splunk&filename=splunk-8.0.1-6db836e2fb9e-linux-2.6-amd64.deb&wget=true'
+apt-get install -y ./splunk-8.0.1-6db836e2fb9e-linux-2.6-amd64.deb
+
+#wget -O splunkforwarder-8.0.1-6db836e2fb9e-linux-2.6-amd64.deb 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=8.0.1&product=universalforwarder&filename=splunkforwarder-8.0.1-6db836e2fb9e-linux-2.6-amd64.deb&wget=true'
+#apt-get install -y ./splunkforwarder-8.0.1-6db836e2fb9e-linux-2.6-amd64.deb
+
+#echo ':splunk:$6$0Hs.FHmPnjudqMHU$naaO6oNJH120nwhFiPcJ04qsrb7Ve6ROjLN6bzo4Sfjsryc3lwIgYOIxeFcxVLW8ok1/HAV6pqnp3EDZZxcVX1::Administrator:admin:changeme@example.com:::18324' > /opt/splunk/etc/passwd
+
+#/opt/splunk/bin/splunk start

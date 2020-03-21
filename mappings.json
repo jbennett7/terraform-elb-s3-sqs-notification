@@ -1,0 +1,9 @@
+[
+    {
+        "DeviceName": "/dev/sdh",
+        "Ebs": {
+            "DeleteOnTermination": true,
+            "VolumeSize": 500
+        }
+    }
+]
